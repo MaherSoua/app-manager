@@ -68,6 +68,21 @@ router.post('/addUser', (req, res, next) => {
   })
 });
 
+router.post('/updateUser', (req, res, next) => {
+  var data = req.body;
+  data.password = bcrypt.hashSync(req.body.password, 10);
+  User.update(data, function (err, stored) {
+    if (err) {
+      return res.status('405').json({
+        message: err
+      })
+    }
+    res.status('200').json({
+      message: stored
+    });
+  })
+});
+
 router.get('/getUsers', (req, res, next) => {
   var token = req.query.token;
 

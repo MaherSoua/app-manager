@@ -46,6 +46,10 @@ User.add = function(user , callback){
   User.create(user, callback);
 }
 
+User.update = (data, callback) => {
+  User.findByIdAndUpdate(data._id, data, callback);
+}
+
 User.removeUser = function (callback, data) {
   User.remove({ _id: ObjectId(data.id) }, callback);
 }
